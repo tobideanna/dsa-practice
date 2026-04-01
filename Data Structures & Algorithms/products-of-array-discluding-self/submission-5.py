@@ -1,0 +1,23 @@
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        # create pre and post arrays and res arrays
+        n = len(nums)
+        res = [0] * n
+        prefix = [0] * n
+        postfix = [0] * n
+        prefix[0] = postfix[n-1] = 1
+
+        #prefix = [1, 0, 0, 0]
+        #postfix = [0, 0, 0, 1]
+        #now, we need to actually calculate prefix. first we start at 1
+        #through n
+
+        for i in range (1, n):
+            prefix[i] = prefix[i-1] * nums[i-1]
+        for i in range(n-2, -1, -1):
+            postfix[i] = postfix[i+1] * nums[i+1]
+        for i in range(n):
+            res[i] = prefix[i] * postfix[i]
+        return res
+
+        
